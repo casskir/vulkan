@@ -8,7 +8,7 @@
     static void* loaderWrap(VkInstance instance, const char* vkproc) {
         return (*symLoader)(instance, vkproc);
     }
-#elif defined(__ANDROID__) || defined(__linux__) || defined(__unix__) || defined(unix)
+#elif defined(unix) || defined(__unix__) || defined(__unix)
     #include <dlfcn.h>
     static void* (*symLoader)(void* lib, const char* procname);
     static void* loaderWrap(VkInstance instance, const char* vkproc) {
@@ -35,7 +35,7 @@ void* getDefaultProcAddr() {
     #elif defined(__APPLE__) && defined(__MACH__)
         // return &loaderWrap;
         return NULL;
-    #elif defined(__ANDROID__) || defined(__linux__) || defined(__unix__) || defined(unix)
+    #elif defined(unix) || defined(__unix__) || defined(__unix)
         void* libvulkan = dlopen("libvulkan.so", RTLD_NOW | RTLD_LOCAL);
         if (libvulkan == NULL) {
             return NULL;

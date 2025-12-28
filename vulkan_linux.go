@@ -1,4 +1,5 @@
-// +build linux,!android,!wayland
+//go:build linux && !android
+// +build linux,!android
 
 package vulkan
 

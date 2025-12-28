@@ -1,69 +1,22 @@
 <img src="https://cl.ly/2H2E3c0T1X16/Vulkan_500px_Mar15.png" width="200">
 
-# Golang Bindings for Vulkan API ![version-1.1.88](https://img.shields.io/badge/version-1.1.88-lightgrey.svg) [![GoDoc](https://godoc.org/github.com/vulkan-go/vulkan?status.svg)](https://godoc.org/github.com/vulkan-go/vulkan)
+# Golang Bindings for Vulkan API ![version-1.3.239](https://img.shields.io/badge/version-1.3.239-lightgrey.svg) [![GoDoc](https://pkg.go.dev/badge/github.com/goki/vulkan.svg)](https://pkg.go.dev/github.com/goki/vulkan)
 
-Package [vulkan](https://github.com/vulkan-go/vulkan) provides Go bindings for [Vulkan](https://www.khronos.org/vulkan/) — a low-overhead, cross-platform 3D graphics and compute API. Updated October 13, 2018 — Vulkan 1.1.88.
+Package [vulkan](https://github.com/goki/vulkan) provides Go bindings for [Vulkan](https://www.khronos.org/vulkan/) — a low-overhead, cross-platform 3D graphics and compute API. Updated February 9, 2023 — Vulkan 1.3.239.
 
 ## Introduction
 
-Vulkan API is the result of 18 months in an intense collaboration between leading hardware, game engine and platform vendors, built on significant contributions from multiple Khronos members. Vulkan is designed for portability across multiple platforms with desktop and mobile GPU architectures.
+The [Vulkan API](https://www.vulkan.org) is a cross-platform industry standard enabling developers to target a wide range of devices with the same graphics API.
 
-Read the brief: https://developer.nvidia.com/engaging-voyage-vulkan
+This Go binding allows one to use Vulkan API directly within Go code, avoiding adding lots of C/C++ in the projects.  The original version is at https://github.com/vulkan-go/vulkan (still on 1.1.88 from 2018) and a fork at https://github.com/goki/vulkan is being more actively maintained at this point.
 
-The binding allows one to use Vulkan API directly within Go code, avoiding
-adding lots of C/C++ in the projects, also can be used to study Vulkan without
-diving too deep into C/C++ language semantics. For me it's just a matter of
-taste, writing Go code is simply more pleasant experience.
+See [UPDATING](UPDATING.md) for extensive notes on how to update to newer vulkan versions as they are released.
 
-See all demos in [vulkan-go/demos](https://github.com/vulkan-go/demos).
+## Examples and usage
 
-## Project history timeline
+The original author, `xlab`, has examples at: https://github.com/vulkan-go/demos and the beginnings of a toolkit at: https://github.com/vulkan-go/asche.
 
-* **2016-02-16** Vulkan API publicly released.
-
-* **2016-03-06** [vulkan-go](https://github.com/vulkan-go) initial commit and first binding.
-
-* **2016-05-14** Finally received my NVIDIA Shield Tablet K1 (DHL lost the first parcel), I decided to use tablet because it was the first device supporting Vulkan out of the box. And that was a really good implementation, much wow very reference.
-
-* **2016-05-17** Created [android-go](https://github.com/xlab/android-go) project in order to run Vulkan on the android platform.
-
-* **2016-05-23** First android-go + vulkan program runs on Tablet K1 ([screenshot](http://dl.kc.vc/vulkan/screens/first-android-vulkaninfo.png)).
-
-* **2016-05-24** Improved VulkanInfo example runs on Tablet K1 ([screenshot](http://dl.kc.vc/vulkan/screens/improved-android-vulkaninfo.png)).
-
-* **2016-05-28** [android-go](https://github.com/xlab/android-go) released into public ([Reddit post](https://www.reddit.com/r/golang/comments/4lgttr/full_golang_bindings_for_android_ndk_api_with/)) with plenty of examples including GLES/EGL.
-
-* **2016-08-13** Finished an app that should draw triangle (ported from tri.c from LunarG demos). Draws nothing instead.
-
-* **2016-08-13** First unsuccessful attempt to write a spinning cube example. More than 25 hours spent, 2.5k lines of C code rewritten into 900 lines of Go code. The reference code was found in some very old LunarG demo, it seems I should've used the latest one.. At least got the validation layers working and found some bugs in the triangle app code.
-
-* **2016-08-16** First Vulkan API program in Go that draws triangle runs on Tablet K1 ([photo](http://dl.kc.vc/vulkan/screens/first-android-vulkandraw.jpg)), validaton layers work perfectly too.
-
-* **2016-08-16** Public announce of this project ([Reddit post](https://www.reddit.com/r/golang/comments/4y2dj4/golang_bindings_for_vulkan_api_with_demos/)). Reaction was "Meh".
-
-* **2016-11-01** [MoltenVK](https://moltengl.com/moltenvk/) driver merged into GLFW (see [GLFW issue #870](https://github.com/glfw/glfw/issues/870)) and this made possible to use Vulkan API under Apple OS X or macOS.
-
-* **2016-11-06** VulkanInfo and VulkanDraw both ported to desktop OS X and use GLFW to initialize Vulkan ([screen #1](http://dl.kc.vc/vulkan/screens/first-moltenvk-vulkaninfo.png) and [screen #2](http://dl.kc.vc/vulkan/screens/first-moltenvk-vulkandraw.png))
-
-* **2016-11-07** VulkanInfo and VulkanDraw run fine on NVIDIA GTX980 initialized through GLFW under Windows 10 ([screen #1](http://dl.kc.vc/vulkan/screens/first-windows-vulkaninfo.png) and [screen #2](http://dl.kc.vc/vulkan/screens/first-windows-vulkandraw.png)).
-
-* **2016-11-08** VulkanInfo runs in headless (a.k.a computing) mode in Amazon AWS cloud on P2 Instance equipped Tesla K80 ([screenshot](http://dl.kc.vc/vulkan/screens/first-amazon-vulkaninfo.png)).
-
-* **2016-11-09** [ios-go](https://github.com/xlab/ios-go) project started, it's very easy to run Golang apps on iOS that use custom surface, for my case it was Metal surface.
-
-* **2016-11-11** VulkanInfo runs fine on my iPhone under iOS ([screenshot](http://dl.kc.vc/vulkan/screens/first-ios-vulkaninfo.png)), and so does VulkanDraw ([photo](http://dl.kc.vc/vulkan/screens/first-ios-vulkandraw.jpg) also [GPU report from XCode](http://dl.kc.vc/vulkan/screens/gpureport-ios-vulkandraw.png))
-
-* **2016-11-13** Second unsuccessful attempt to write spinning cube. 25 hours spent. The approach was highly inspired by [Mali Vulkan SDK for Android 1.0](http://malideveloper.arm.com/downloads/deved/tutorial/SDK/Vulkan/1.0/index.html) and I created initial version of [vulkan-go/asche](https://github.com/vulkan-go/asche) — a higher level framework to simplify Vulkan initialization for new apps.
-
-* **2016-11-29** Generic Linux support added in using GLFW ([Issue #2](https://github.com/vulkan-go/vulkan/issues/2)) thanks @jfreymuth.
-
-* **2017-05-06** Third, successful attempt to write spining cube example. 16 hours spent, 4K LOC of C code rewritten from [cube.c](https://github.com/LunarG/VulkanSamples/blob/master/demos/cube.c) of LunarG demos. The whole process has been screencasted, maybe I will release it one day.
-
-* **2017-05-06** [vulkan-go/asche](https://github.com/vulkan-go/asche) complete.
-
-* **2018-10-13** Updated to Vulkan 1.1.88 spec.
-
-* **2022-11-26** Changed loader for Android. Now compatible with [Android 8 (Oreo)](https://android.googlesource.com/platform/external/vulkan-validation-layers/+/refs/heads/oreo-release/loader/LoaderAndLayerInterface.md) API level 26 a higher.
+The updated version is being used extensively in the [goki](https://github.com/goki) framework, powering the [GoGi](https://github.com/goki/gi) 2D and 3D GUI framework, based on the [VGPU](https://github.com/goki/vgpu) toolkit that manages the considerable complexity of dealing with Vulkan.  VGPU is also used as a GPU compute engine framework in the emergent neural network modeling framework [axon](https://github.com/emer/axon).
 
 ## How to use
 
@@ -71,7 +24,7 @@ Usage of this project is straightforward due to the stateless nature of Vulkan A
 Just import the package like this:
 
 ```
-import vk "github.com/vulkan-go/vulkan"
+import vk "github.com/goki/vulkan"
 ```
 
 Set the GetProcAddress pointer (used to look up Vulkan functions) using SetGetInstanceProcAddr or SetDefaultGetInstanceProcAddr. After that you can call Init to initialise the library. For example:
@@ -105,15 +58,143 @@ Instead vulkan-go expects the dylibs to be present in the library search path.
 
 Follow the [build instructions](https://github.com/KhronosGroup/MoltenVK#building), but instead of `make install` manually copy `./Package/Latest/MoltenVK/dylib/macOS/libMoltenVK.dylib` to `/usr/local/lib`
 
+**IMPORTANT:** be sure to remove any existing `libMoltenVK.dylib` file *before* copying a new one, otherwise you'll have to reboot your computer due to the way the gatekeeper mechanism works!
+
+## MoltenVK on iOS
+
+grab MoltenVK asset from github actions, copy to suitable directory:
+
+```
+-L/Users/oreilly/dev/ios/MoltenVK/MoltenVK/dylib/iOS/`  and `-lMoltenVK ` in `vulkan_ios.go`
+
+$ cp libMoltenVK.dylib myapp.app` 
+$ lipo -create libMoltenVK.dylib -output MoltenVK`
+$ mkdir MoltenVK.framework
+$ mv MoltenVK MoltenVK.framework/
+$ install_name_tool -change @rpath/libMoltenVK.dylib @executable_path/MoltenVK.framework/MoltenVK main
+$ codesign --force --deep --verbose=2 --sign "Randall O'Reilly" widgets.app
+$ codesign -vvvv ../widgets.app
+```
+
+Info.plist for `MoltenVK.framework`
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>22F82</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleExecutable</key>
+	<string>MoltenVK</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.example.test.MoltenVK</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>MoltenVK</string>
+	<key>CFBundlePackageType</key>
+	<string>FMWK</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+</dict>
+</plist>
+```
+
+main Info.plist for reference:
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>22F82</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleExecutable</key>
+	<string>main</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.example.test.widgets</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Widgets</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>iPhoneOS</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string>20E238</string>
+	<key>DTPlatformName</key>
+	<string>iphoneos</string>
+	<key>DTPlatformVersion</key>
+	<string>16.4</string>
+	<key>DTSDKBuild</key>
+	<string>20E238</string>
+	<key>DTSDKName</key>
+	<string>iphoneos16.4</string>
+	<key>DTXcode</key>
+	<string>1431</string>
+	<key>DTXcodeBuild</key>
+	<string>14E300c</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
+	<key>MinimumOSVersion</key>
+	<string>16.4</string>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+		<integer>2</integer>
+	</array>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>arm64</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+</dict>
+</plist>
+```
+
+
+
 ## Validation Layers
 
 A good brief of the current state of Vulkan validation layers: [Explore the Vulkan Loader and Validation Layers](https://lunarg.com/wp-content/uploads/2016/07/lunarg-birds-feather-session-siggraph-july-26-2016.pdf) (PDF).
 
-There is a full support of validation layers with custom callbacks in Go.
-
-Khronos Group releasing compiled Validation Layers like .so library directly on their [GitHub respository](https://github.com/KhronosGroup/Vulkan-ValidationLayers/releases/)
-
-Or You can build them from https://github.com/LunarG/VulkanTools like this:
+There is a full support of validation layers with custom callbacks in Go. For my Android experiments I got the standard pack of layers from https://github.com/LunarG/VulkanTools and built them like this:
 
 ```
 $ cd build-android

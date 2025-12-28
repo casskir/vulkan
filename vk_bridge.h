@@ -962,29 +962,29 @@ VkResult callVkCreateIOSSurfaceMVK(
     const VkAllocationCallbacks*            pAllocator,
     VkSurfaceKHR*                           pSurface);
 
-VkResult callVkActivateMoltenVKLicenseMVK(
-    const char*                                 licenseID,
-    const char*                                 licenseKey,
-    VkBool32                                    acceptLicenseTermsAndConditions);
-
-VkResult callVkActivateMoltenVKLicensesMVK();
+// VkResult callVkActivateMoltenVKLicenseMVK(
+//     const char*                                 licenseID,
+//     const char*                                 licenseKey,
+//     VkBool32                                    acceptLicenseTermsAndConditions);
+// 
+// VkResult callVkActivateMoltenVKLicensesMVK();
 
 VkResult callVkGetMoltenVKDeviceConfigurationMVK(
     VkDevice                                    device,
-    MVKDeviceConfiguration*                     pConfiguration);
+    MVKConfiguration*                     pConfiguration);
 
 VkResult callVkSetMoltenVKDeviceConfigurationMVK(
     VkDevice                                    device,
-    MVKDeviceConfiguration*                     pConfiguration);
+    MVKConfiguration*                     pConfiguration);
 
 VkResult callVkGetPhysicalDeviceMetalFeaturesMVK(
     VkPhysicalDevice                            physicalDevice,
     MVKPhysicalDeviceMetalFeatures*             pMetalFeatures);
 
-VkResult callVkGetSwapchainPerformanceMVK(
-    VkDevice                                    device,
-    VkSwapchainKHR                              swapchain,
-    MVKSwapchainPerformance*                    pSwapchainPerf);
+// VkResult callVkGetSwapchainPerformanceMVK(
+//     VkDevice                                    device,
+//     VkSwapchainKHR                              swapchain,
+//     MVKSwapchainPerformance*                    pSwapchainPerf);
 #endif /* VK_USE_PLATFORM_IOS_MVK */
 
 #ifdef VK_USE_PLATFORM_WIN32_KHR
