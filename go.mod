@@ -1,3 +1,3 @@
-module github.com/goki/vulkan
+module github.com/vulkan-go/vulkan
 
 go 1.18
