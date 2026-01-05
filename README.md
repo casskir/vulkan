@@ -1,14 +1,14 @@
 <img src="https://cl.ly/2H2E3c0T1X16/Vulkan_500px_Mar15.png" width="200">
 
-# Golang Bindings for Vulkan API ![version-1.3.239](https://img.shields.io/badge/version-1.3.239-lightgrey.svg) [![GoDoc](https://pkg.go.dev/badge/github.com/goki/vulkan.svg)](https://pkg.go.dev/github.com/goki/vulkan)
+# Golang Bindings for Vulkan API ![version-1.3.239](https://img.shields.io/badge/version-1.3.239-lightgrey.svg) [![GoDoc](https://pkg.go.dev/badge/github.com/casskir/vulkan.svg)](https://pkg.go.dev/github.com/casskir/vulkan)
 
-Package [vulkan](https://github.com/goki/vulkan) provides Go bindings for [Vulkan](https://www.khronos.org/vulkan/) — a low-overhead, cross-platform 3D graphics and compute API. Updated February 9, 2023 — Vulkan 1.3.239.
+Package [vulkan](https://github.com/vulkan-go/vulkan) provides Go bindings for [Vulkan](https://www.khronos.org/vulkan/) — a low-overhead, cross-platform 3D graphics and compute API. Updated February 9, 2023 — Vulkan 1.3.239.
 
 ## Introduction
 
 The [Vulkan API](https://www.vulkan.org) is a cross-platform industry standard enabling developers to target a wide range of devices with the same graphics API.
 
-This Go binding allows one to use Vulkan API directly within Go code, avoiding adding lots of C/C++ in the projects.  The original version is at https://github.com/vulkan-go/vulkan (still on 1.1.88 from 2018) and a fork at https://github.com/goki/vulkan is being more actively maintained at this point.
+This Go binding allows one to use Vulkan API directly within Go code, avoiding adding lots of C/C++ in the projects.  The original version is at https://github.com/vulkan-go/vulkan (still on 1.1.88 from 2018) and a fork at https://github.com/casskir/vulkan is being more actively maintained at this point.
 
 See [UPDATING](UPDATING.md) for extensive notes on how to update to newer vulkan versions as they are released.
 
@@ -16,15 +16,13 @@ See [UPDATING](UPDATING.md) for extensive notes on how to update to newer vulkan
 
 The original author, `xlab`, has examples at: https://github.com/vulkan-go/demos and the beginnings of a toolkit at: https://github.com/vulkan-go/asche.
 
-The updated version is being used extensively in the [goki](https://github.com/goki) framework, powering the [GoGi](https://github.com/goki/gi) 2D and 3D GUI framework, based on the [VGPU](https://github.com/goki/vgpu) toolkit that manages the considerable complexity of dealing with Vulkan.  VGPU is also used as a GPU compute engine framework in the emergent neural network modeling framework [axon](https://github.com/emer/axon).
-
 ## How to use
 
 Usage of this project is straightforward due to the stateless nature of Vulkan API.
 Just import the package like this:
 
 ```
-import vk "github.com/goki/vulkan"
+import vk "github.com/vulkan-go/vulkan"
 ```
 
 Set the GetProcAddress pointer (used to look up Vulkan functions) using SetGetInstanceProcAddr or SetDefaultGetInstanceProcAddr. After that you can call Init to initialise the library. For example:
@@ -62,9 +60,7 @@ Follow the [build instructions](https://github.com/KhronosGroup/MoltenVK#buildin
 
 ## MoltenVK on iOS
 
-The following steps are needed when developing for iOS and **not** using the `goki` tool. When using the `goki` tool, it will do all of these steps for you; you just need to run `goki setup ios` once to create the framework and then `goki build` will always copy the framework and set the environment variables for you. This information only exists for reference if you are not using the `goki` tool, and should not be relevant for most people.
-
-Download the MoltenVK iOS asset from [the MoltenVK GitHub releases](https://github.com/KhronosGroup/MoltenVK/releases/latest/download/MoltenVK-ios.tar). Then, copy it to your `~/Library/goki` directory, and make a `.framework` by running:
+Download the MoltenVK iOS asset from [the MoltenVK GitHub releases](https://github.com/KhronosGroup/MoltenVK/releases/latest/download/MoltenVK-ios.tar). Then, copy it to your `~/Library/casskir` directory, and make a `.framework` by running:
 
 ```sh
 install_name_tool -id @executable_path/MoltenVK.framework/MoltenVK libMoltenVK.dylib
@@ -76,13 +72,13 @@ codesign --force --deep --verbose=2 --sign "rcoreilly@me.com" MoltenVK.framework
 codesign -vvvv MoltenVK.framework
 ```
 
-When building apps, build the app with the environment variable `CGO_LDFLAGS=-F/Users/{{you}}/Library/goki`. Then, after you build the app, run:
+When building apps, build the app with the environment variable `CGO_LDFLAGS=-F/Users/{{you}}/Library/casskir`. Then, after you build the app, run:
 ```
-cp -r ~/Library/goki/MoltenVK.framework {{appname}}.app
+cp -r ~/Library/casskir/MoltenVK.framework {{appname}}.app
 ```
 For example:
 ```
-cp -r ~/Library/goki/MoltenVK.framework drawtri.app
+cp -r ~/Library/casskir/MoltenVK.framework drawtri.app
 ```
 
 Info.plist for `MoltenVK.framework` (needs to be copied when making a framework above)
@@ -99,7 +95,7 @@ Info.plist for `MoltenVK.framework` (needs to be copied when making a framework 
 	<key>CFBundleExecutable</key>
 	<string>MoltenVK</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.goki.MoltenVK</string>
+	<string>com.casskir.MoltenVK</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

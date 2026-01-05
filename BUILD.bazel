@@ -37,7 +37,7 @@ go_library(
     ],
     cdeps = [":vulkan_headers"] + select({
         "@io_bazel_rules_go//go/platform:darwin": [
-            "@com_github_goki_vulkan_mac_deps//:vulkan_mac_deps",
+            "@com_github_casskir_vulkan_mac_deps//:vulkan_mac_deps",
         ],
         "//conditions:default": [],
     }),
@@ -100,6 +100,6 @@ go_library(
         ],
         "//conditions:default": [],
     }),
-    importpath = "github.com/goki/vulkan",
+    importpath = "github.com/casskir/vulkan",
     visibility = ["//visibility:public"],
 )
