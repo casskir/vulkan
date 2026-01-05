@@ -62,21 +62,30 @@ Follow the [build instructions](https://github.com/KhronosGroup/MoltenVK#buildin
 
 ## MoltenVK on iOS
 
-grab MoltenVK asset from github actions, copy to suitable directory:
+The following steps are needed when developing for iOS and **not** using the `goki` tool. When using the `goki` tool, it will do all of these steps for you; you just need to run `goki setup ios` once to create the framework and then `goki build` will always copy the framework and set the environment variables for you. This information only exists for reference if you are not using the `goki` tool, and should not be relevant for most people.
 
+Download the MoltenVK iOS asset from [the MoltenVK GitHub releases](https://github.com/KhronosGroup/MoltenVK/releases/latest/download/MoltenVK-ios.tar). Then, copy it to your `~/Library/goki` directory, and make a `.framework` by running:
+
+```sh
+install_name_tool -id @executable_path/MoltenVK.framework/MoltenVK libMoltenVK.dylib
+lipo -create libMoltenVK.dylib -output MoltenVK
+mkdir MoltenVK.framework
+mv MoltenVK MoltenVK.framework
+# now copy the Info.plist for MoltenVK.framework below into MoltenVK.framework/Info.plist
+codesign --force --deep --verbose=2 --sign "rcoreilly@me.com" MoltenVK.framework
+codesign -vvvv MoltenVK.framework
 ```
--L/Users/oreilly/dev/ios/MoltenVK/MoltenVK/dylib/iOS/`  and `-lMoltenVK ` in `vulkan_ios.go`
 
-$ cp libMoltenVK.dylib myapp.app` 
-$ lipo -create libMoltenVK.dylib -output MoltenVK`
-$ mkdir MoltenVK.framework
-$ mv MoltenVK MoltenVK.framework/
-$ install_name_tool -change @rpath/libMoltenVK.dylib @executable_path/MoltenVK.framework/MoltenVK main
-$ codesign --force --deep --verbose=2 --sign "Randall O'Reilly" widgets.app
-$ codesign -vvvv ../widgets.app
+When building apps, build the app with the environment variable `CGO_LDFLAGS=-F/Users/{{you}}/Library/goki`. Then, after you build the app, run:
+```
+cp -r ~/Library/goki/MoltenVK.framework {{appname}}.app
+```
+For example:
+```
+cp -r ~/Library/goki/MoltenVK.framework drawtri.app
 ```
 
-Info.plist for `MoltenVK.framework`
+Info.plist for `MoltenVK.framework` (needs to be copied when making a framework above)
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -90,7 +99,7 @@ Info.plist for `MoltenVK.framework`
 	<key>CFBundleExecutable</key>
 	<string>MoltenVK</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.example.test.MoltenVK</string>
+	<string>com.goki.MoltenVK</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

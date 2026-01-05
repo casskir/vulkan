@@ -36,6 +36,7 @@ int vkInitInstance(VkInstance instance) {
     vgo_vkDestroyInstance = (PFN_vkDestroyInstance)((*getInstanceProcAddress)(instance, "vkDestroyInstance"));
     vgo_vkEnumeratePhysicalDevices = (PFN_vkEnumeratePhysicalDevices)((*getInstanceProcAddress)(instance, "vkEnumeratePhysicalDevices"));
     vgo_vkGetPhysicalDeviceFeatures = (PFN_vkGetPhysicalDeviceFeatures)((*getInstanceProcAddress)(instance, "vkGetPhysicalDeviceFeatures"));
+    vgo_vkGetPhysicalDeviceFeatures2 = (PFN_vkGetPhysicalDeviceFeatures2)((*getInstanceProcAddress)(instance, "vkGetPhysicalDeviceFeatures2"));
     vgo_vkGetPhysicalDeviceFormatProperties = (PFN_vkGetPhysicalDeviceFormatProperties)((*getInstanceProcAddress)(instance, "vkGetPhysicalDeviceFormatProperties"));
     vgo_vkGetPhysicalDeviceImageFormatProperties = (PFN_vkGetPhysicalDeviceImageFormatProperties)((*getInstanceProcAddress)(instance, "vkGetPhysicalDeviceImageFormatProperties"));
     vgo_vkGetPhysicalDeviceProperties = (PFN_vkGetPhysicalDeviceProperties)((*getInstanceProcAddress)(instance, "vkGetPhysicalDeviceProperties"));
@@ -227,6 +228,7 @@ PFN_vkCreateInstance vgo_vkCreateInstance;
 PFN_vkDestroyInstance vgo_vkDestroyInstance;
 PFN_vkEnumeratePhysicalDevices vgo_vkEnumeratePhysicalDevices;
 PFN_vkGetPhysicalDeviceFeatures vgo_vkGetPhysicalDeviceFeatures;
+PFN_vkGetPhysicalDeviceFeatures2 vgo_vkGetPhysicalDeviceFeatures2;
 PFN_vkGetPhysicalDeviceFormatProperties vgo_vkGetPhysicalDeviceFormatProperties;
 PFN_vkGetPhysicalDeviceImageFormatProperties vgo_vkGetPhysicalDeviceImageFormatProperties;
 PFN_vkGetPhysicalDeviceProperties vgo_vkGetPhysicalDeviceProperties;

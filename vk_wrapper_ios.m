@@ -28,6 +28,7 @@ int vkInitInstance(VkInstance instance) {
     vgo_vkDestroyInstance = (PFN_vkDestroyInstance)(vgo_vkGetInstanceProcAddr(instance, "vkDestroyInstance"));
     vgo_vkEnumeratePhysicalDevices = (PFN_vkEnumeratePhysicalDevices)(vgo_vkGetInstanceProcAddr(instance, "vkEnumeratePhysicalDevices"));
     vgo_vkGetPhysicalDeviceFeatures = (PFN_vkGetPhysicalDeviceFeatures)(vgo_vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceFeatures"));
+    vgo_vkGetPhysicalDeviceFeatures2 = (PFN_vkGetPhysicalDeviceFeatures2)(vgo_vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceFeatures2"));
     vgo_vkGetPhysicalDeviceFormatProperties = (PFN_vkGetPhysicalDeviceFormatProperties)(vgo_vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceFormatProperties"));
     vgo_vkGetPhysicalDeviceImageFormatProperties = (PFN_vkGetPhysicalDeviceImageFormatProperties)(vgo_vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceImageFormatProperties"));
     vgo_vkGetPhysicalDeviceProperties = (PFN_vkGetPhysicalDeviceProperties)(vgo_vkGetInstanceProcAddr(instance, "vkGetPhysicalDeviceProperties"));
@@ -226,6 +227,7 @@ PFN_vkCreateInstance vgo_vkCreateInstance;
 PFN_vkDestroyInstance vgo_vkDestroyInstance;
 PFN_vkEnumeratePhysicalDevices vgo_vkEnumeratePhysicalDevices;
 PFN_vkGetPhysicalDeviceFeatures vgo_vkGetPhysicalDeviceFeatures;
+PFN_vkGetPhysicalDeviceFeatures2 vgo_vkGetPhysicalDeviceFeatures2;
 PFN_vkGetPhysicalDeviceFormatProperties vgo_vkGetPhysicalDeviceFormatProperties;
 PFN_vkGetPhysicalDeviceImageFormatProperties vgo_vkGetPhysicalDeviceImageFormatProperties;
 PFN_vkGetPhysicalDeviceProperties vgo_vkGetPhysicalDeviceProperties;

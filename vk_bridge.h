@@ -30,6 +30,10 @@ void callVkGetPhysicalDeviceFeatures(
     VkPhysicalDevice                            physicalDevice,
     VkPhysicalDeviceFeatures*                   pFeatures);
 
+void callVkGetPhysicalDeviceFeatures2(
+    VkPhysicalDevice                            physicalDevice,
+    VkPhysicalDeviceFeatures2*                  pFeatures);
+
 void callVkGetPhysicalDeviceFormatProperties(
     VkPhysicalDevice                            physicalDevice,
     VkFormat                                    format,
