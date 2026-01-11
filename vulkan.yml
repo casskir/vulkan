@@ -155,4 +155,3 @@ TRANSLATOR:
       - {target: VkGraphicsPipelineCreateInfo, tips: [0,0,0,0,arr,ref,ref,ref,ref,ref,ref,ref,ref,ref]}
       - {target: VkInstanceCreateInfo, tips: [0,0,0,ref]}
       - {target: DescriptorSetLayoutBinding, tips: [0,0,0,0,ref]}
-      - {target: VkPipelineMultisampleStateCreateInfo, tips: [0,0,0,0,0,0,ref,0,0,0]}
